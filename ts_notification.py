@@ -2,9 +2,8 @@ import typing
 import subprocess
 from time import sleep
 from datetime import datetime
-import os
-
 from BarkNotificator import BarkNotificator
+import os
 
 bark = BarkNotificator(device_token=os.environ["BARK_DEVICE_TOKEN"])
 
@@ -33,8 +32,8 @@ def get_tailscale_status() -> typing.List[TailscaleDevice]:
             parts = line.split()
 
             online = False
-            status = parts[4]
-            if not status.startswith("offline"):
+            status = " ".join(parts[4:])
+            if "offline" not in status:
                 online = True
 
             ip = parts[0]
